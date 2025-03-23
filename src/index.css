@@ -1,4 +1,8 @@
-body {
+body > div {
   display: flex;
-  place-content: center;
+  justify-items: center;
+  align-items: start;
+  gap: 5rem;
+  max-width: max-content;
+  margin-inline: auto;
 }

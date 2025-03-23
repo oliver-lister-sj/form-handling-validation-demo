@@ -3,5 +3,5 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  min-width: 30vw;
+  min-width: clamp(400px, 25vw, 800px);
 }

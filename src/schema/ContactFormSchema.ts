@@ -20,7 +20,7 @@ export const ContactFormSchemaZod = z.object({
   lastName: NameSchemaZod("Last Name"),
   phoneNumber: z
     .string()
-    .min(1, "phoneNumber is required")
+    .min(1, "Phone Number is required")
     .regex(phoneRegex, "Invalid number"),
   email: z.string().email("Invalid email").optional().or(z.literal("")),
 });
@@ -38,15 +38,15 @@ export type ContactFormDataZod = z.infer<typeof ContactFormSchemaZod>;
 const NameSchemaYup = (name: string) =>
   yup
     .string()
-    .min(1, `${name} is required`)
+    .required(`${name} is required`)
     .max(50, `${name} cannot be longer than 50 characters`);
 
-export const ContactFormSchemaYup = yup.object({
+export const ContactFormSchemaYup = yup.object().shape({
   firstName: NameSchemaYup("First Name"),
   lastName: NameSchemaYup("Last Name"),
   phoneNumber: yup
     .string()
-    .min(1, "phoneNumber is required")
+    .required("Phone Number is required")
     .matches(phoneRegex, "Invalid number"),
   email: yup.string().email("Invalid email").nullable().optional(),
 });

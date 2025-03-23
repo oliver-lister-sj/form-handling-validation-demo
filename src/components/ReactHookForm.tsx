@@ -5,6 +5,8 @@ import {
   ContactFormDataZod,
   ContactFormSchemaZod,
 } from "../schema/ContactFormSchema";
+import { contactFormInitialValues } from "../lib/ContactFormInitialValues";
+import submitData from "../lib/submitData";
 
 const ReactHookForm = () => {
   const {
@@ -13,25 +15,11 @@ const ReactHookForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormDataZod>({
     resolver: zodResolver(ContactFormSchemaZod),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      email: "",
-    },
+    defaultValues: contactFormInitialValues,
   });
 
   // very handy formState methods like isSubmitting with removes the need for isLoading state.
   // or isLoading when the defaultValues are async data.
-
-  const submitData = async (values: ContactFormDataZod) => {
-    await new Promise<void>((resolve) =>
-      setTimeout(() => {
-        console.log(values);
-        resolve();
-      }, 1000)
-    );
-  };
 
   return (
     <form className="form" onSubmit={handleSubmit(submitData)}>
